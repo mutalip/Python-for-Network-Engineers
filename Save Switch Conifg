@@ -1,0 +1,39 @@
+#####################################################
+#IP addresss are saved on a file#####################
+###Using For loop to access each switches############
+import sys
+import telnetlib
+import time
+
+password = "XXXXXX"
+command = "sh run"
+term = "term len 0"
+user = "XXXXX"
+data = open("C:\XXXXXXXX\hostlist.txt")
+for line in data:
+    cmd1 = "enable"
+    tn = telnetlib.Telnet(line.rstrip())
+    output = "C:\Python36\Config" + str(line.rstrip()) + ".txt"
+    tn.set_debuglevel(1)
+    time.sleep(2)
+    #tn.read_until(b"Username: ")
+    #tn.write(user.encode('ascii') + b"\n")
+    tn.read_until(b"Password: ")
+    tn.write(password.encode('ascii') + b"\n")
+    time.sleep(2)
+    tn.write(cmd1.encode('ascii') + b"\n")
+    time.sleep(2)
+    tn.write(password.encode('ascii') + b"\n")
+    time.sleep(2)
+    tn.write(term.encode('ascii') + b"\n")
+    tn.write(command.encode('ascii') + b"\n")
+    time.sleep(2)
+    tn.write(b"\n")
+    time.sleep(2)
+    tn.write(b"\n")
+    time.sleep(2)
+    tn.write(b"exit\n")
+    lastpost = tn.read_all().decode('ascii')
+    print(lastpost)
+    op=open (output, "a").write(lastpost)
+    tn.close()

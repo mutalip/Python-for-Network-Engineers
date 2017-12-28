@@ -1,0 +1,10 @@
+================================
+Install Paramiko:
+================================
+apt-get update
+apt-get install python -y
+apt-get install build-essential libssl-dev libffi-dev -y
+apt-get install python-pip -y
+apt-get installpython-dev # You may need to install this as well
+pip install cryptography
+pip install paramiko
